@@ -1,0 +1,24 @@
+import pandas
+import requests
+import pandas as pd
+from bs4 import BeautifulSoup
+url='https://ticker.finology.in/'
+r=requests.get(url)
+print(r)
+
+soup=BeautifulSoup(r.text)
+table=soup.find('table', class_= 'table table-sm table-hover screenertable')
+print(table)
+
+headers=table.find_all('th')
+# print(headers)
+
+titles=[]
+for i in headers:
+    title=i.text
+    titles.append(title)
+
+df=pd.DataFrame(columns=titles)
+print(df)
+
+# print(titles)
